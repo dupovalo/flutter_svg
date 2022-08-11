@@ -529,6 +529,7 @@ abstract class AssetBundlePictureProvider
       {PictureErrorListener? onError}) {
     return OneFramePictureStreamCompleter(
       _loadAsync(key, onError),
+      key: key,
       informationCollector: () => <DiagnosticsNode>[
         DiagnosticsProperty<PictureProvider>('Picture provider', this),
         DiagnosticsProperty<AssetBundlePictureKey>('Picture key', key),
@@ -628,6 +629,7 @@ class NetworkPicture
       {PictureErrorListener? onError}) {
     return OneFramePictureStreamCompleter(
       _loadAsync(key, onError: onError),
+      key: key,
       informationCollector: () => <DiagnosticsNode>[
         DiagnosticsProperty<PictureProvider>('Picture provider', this),
         DiagnosticsProperty<PictureKey<NetworkPictureKeyData>>(
@@ -695,6 +697,7 @@ class FilePicture extends PictureProvider<PictureKey<String>, Uint8List> {
       {PictureErrorListener? onError}) {
     return OneFramePictureStreamCompleter(
       _loadAsync(key, onError: onError),
+      key: key,
       informationCollector: () => <DiagnosticsNode>[
         DiagnosticsProperty<String>('Path', file.path),
       ],
@@ -765,7 +768,7 @@ class MemoryPicture extends PictureProvider<PictureKey<Uint8List>, Uint8List> {
   @override
   PictureStreamCompleter load(PictureKey<Uint8List> key,
       {PictureErrorListener? onError}) {
-    return OneFramePictureStreamCompleter(_loadAsync(key, onError: onError));
+    return OneFramePictureStreamCompleter(_loadAsync(key, onError: onError), key: key);
   }
 
   Future<PictureInfo> _loadAsync(PictureKey<Uint8List> key,
@@ -826,7 +829,7 @@ class StringPicture extends PictureProvider<PictureKey<String>, String> {
   @override
   PictureStreamCompleter load(PictureKey<String> key,
       {PictureErrorListener? onError}) {
-    return OneFramePictureStreamCompleter(_loadAsync(key, onError: onError));
+    return OneFramePictureStreamCompleter(_loadAsync(key, onError: onError), key: key);
   }
 
   Future<PictureInfo> _loadAsync(
